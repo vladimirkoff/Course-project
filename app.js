@@ -72,7 +72,7 @@ document.querySelector('.btn-hold').addEventListener('click', function() { // an
 
 
 function nextPlayer() {
-  // this switches the activePlayer from 0 to/fro 1
+  // this switches the activePlayer from 0
   activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
   roundScore = 0; // that round's score needs to be set back to 0
   prevDice1 = prevDice2 = 0;
