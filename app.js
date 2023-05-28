@@ -6,8 +6,9 @@ init();
 // addEventListener registers a single event listener on a single target. 2 args: 1. the event type e.g. click. 2. the function to be called when the event happens. note: you can use anonymous function as argument instead of external function like btn() on line 7 e.g. function() {}
 function btn() {
   if (gamePlaying) {
-    const dice1 = Math.floor(Math.random() * 6) + 1;
-    const dice2 = Math.floor(Math.random() * 6) + 1;
+    // 1. random number
+    var dice1 = Math.floor(Math.random() * 6) + 1;
+    var dice2 = Math.floor(Math.random() * 6) + 1;
 
     //2. display result: unhiding the dice after 'rolling' it
     document.getElementById('dice-1').style.display = 'block';
@@ -37,12 +38,10 @@ function btn() {
 
 }
 document.querySelector('.btn-roll').addEventListener('click', btn);
-
 // button hold - hold the score and change active player
 document.querySelector('.btn-hold').addEventListener('click', function() { // anonymous function
   if (gamePlaying) {
     // Add current score to global score
-    // score[0] is player0; score[1] is player1. We're adding activePlayer's round score to their global score
     scores[activePlayer] += roundScore;
 
     // Update the UI
@@ -50,11 +49,10 @@ document.querySelector('.btn-hold').addEventListener('click', function() { // an
 
     // checking for user input for new score goal
     inputScore = document.getElementById('input-score').value;
+    // debugging
 
     // check if user had input a score to win
-    if (!inputScore) {
-      inputScore = 100;
-    }
+    if (!inputScore) inputScore = 100;
 
     // Check if player won the game
     if (scores[activePlayer] >= inputScore) {
@@ -86,8 +84,11 @@ function nextPlayer() {
   // when a player rolls a 1, they should lose that current score
   document.getElementById('current-0').textContent = 0;
   document.getElementById('current-1').textContent = 0;
+
+  // changing the active player 'display dot' in the class name
   document.querySelector('.player-0-panel').classList.toggle('active');
   document.querySelector('.player-1-panel').classList.toggle('active');
+  // another way of doing it:
 };
 
 
@@ -105,7 +106,6 @@ function init() {
   document.getElementById('dice-1').style.display = 'none';
   document.getElementById('dice-2').style.display = 'none';
 
-  // getElementById only works for ids but is faster than querySelector. Unlike querySelector, it doesn't need '#' for id because it know it's an id already
   document.getElementById('score-0').textContent = '0';
   document.getElementById('score-1').textContent = '0';
   document.getElementById('current-0').textContent = '0';
@@ -115,7 +115,7 @@ function init() {
   document.getElementById('name-0').textContent = 'Player 1';
   document.getElementById('name-1').textContent = 'Player 2';
 
-  // resetting class list to default (without 'winner')
+  // resetting class list to default
   document.querySelector('.player-0-panel').classList.remove('winner');
   document.querySelector('.player-1-panel').classList.remove('winner');
 
